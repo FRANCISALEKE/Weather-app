@@ -22,6 +22,7 @@ window.addEventListener("load", () => {
           return response.json();
         })
         .then((data) => {
+          console.log(data);
           const { temperature, summary, icon } = data.currently;
           // set DOM Elements from API
           temperatureDegree.textContent = temperature;
@@ -30,6 +31,7 @@ window.addEventListener("load", () => {
 
           //Formula for celsius
           let celsius = (temperature - 32) * (5 / 9);
+
           //set Icon
           setIcons(icon, document.querySelector(".icon"));
 
@@ -50,8 +52,9 @@ window.addEventListener("load", () => {
 
   function setIcons(icon, iconID) {
     const skycons = new Skycons({ color: "white" });
-    const currentIcon = icon.replace(/-/g, "_").toUppercase;
+    const currentIcon = icon.replace(/-/g, "_").toUpperCase();
+
     skycons.play();
-    return skycons.set(iconID, skycons[currentIcon]);
+    return skycons.set(iconID, Skycons[currentIcon]);
   }
 });
